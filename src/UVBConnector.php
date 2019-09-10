@@ -48,9 +48,17 @@ class UVBConnector
      */
     function __construct($email, $publicApiKey, $privateApiKey)
     {
-        $this->hash = hash('sha256', $email);
-        $this->publicApiKey = $publicApiKey;
-        $this->privateApiKey = $privateApiKey;
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // Remove the string after + before @
+            $email = preg_replace('/(.+)\+.*(@.+)/', '$1$2', $email);
+
+            // Hash the string with sha256sum
+            $email = hash('sha256', $email);
+
+            $this->hash = $email;
+            $this->publicApiKey = $publicApiKey;
+            $this->privateApiKey = $privateApiKey;
+        }
     }
 
     /**
@@ -65,7 +73,7 @@ class UVBConnector
 
         return $this->response;
     }
-    
+
     public function post($outcome)
     {
         $this->_submitToUVBService($outcome);
@@ -90,7 +98,7 @@ class UVBConnector
 
     /**
      * Submit payload to UVB Signals API endpoint
-     * 
+     *
      * @param $outcome
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
