@@ -23,7 +23,7 @@ If you wish to omit using Composer altogether, you can download the sources from
 
 ## Getting started
 
-You can start making requests to the UV-B API just by creating a new `Request` instance
+You can start making requests to the UV-B API just by creating a new `UVBConnector` instance and calling it's `get()` or `post($outcome)` method. 
 
 ```php
 <?php
