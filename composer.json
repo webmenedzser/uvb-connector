@@ -1,0 +1,23 @@
+{
+  "name": "webmenedzser/uvb-connector",
+  "description": "UVB API Connector",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Ottó Radics",
+      "email": "otto@webmenedzser.hu",
+      "homepage": "https://www.webmenedzser.hu"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "webmenedzser\\UVBConnector\\": "src"
+    }
+  }
+}
