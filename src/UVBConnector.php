@@ -4,6 +4,12 @@ namespace webmenedzser\UVBConnector;
 
 use GuzzleHttp\Client;
 
+/**
+ * Class UVBConnector
+ *
+ * @author Ottó Radics <otto@webmenedzser.hu>
+ * @package webmenedzser\UVBConnector
+ */
 class UVBConnector
 {
     /**
@@ -65,7 +71,6 @@ class UVBConnector
      * Check e-mail reputation
      *
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get()
     {
@@ -83,24 +88,25 @@ class UVBConnector
 
     /**
      * Send request to UVB API
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function _checkUVBService() : void
     {
         $client = new Client();
-        $this->response = $client->request('GET', $this->baseUrl . $this->hash, [
-            'auth' => [$this->publicApiKey, $this->privateApiKey]
-        ]);
+        try {
+            $this->response = $client->request('GET', $this->baseUrl . $this->hash, [
+                'auth' => [$this->publicApiKey, $this->privateApiKey]
+            ]);
 
-        $this->response = $this->response->getBody()->getContents();
+            $this->response = $this->response->getBody()->getContents();
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            //
+        }
     }
 
     /**
      * Submit payload to UVB Signals API endpoint
      *
      * @param $outcome
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function _submitToUVBService($outcome) : void
     {
@@ -110,11 +116,15 @@ class UVBConnector
         ];
 
         $client = new Client();
-        $this->response = $client->request('POST', $this->baseUrl, [
-            'auth' => [$this->publicApiKey, $this->privateApiKey],
-            'json' => $payload
-        ]);
+        try {
+            $this->response = $client->request('POST', $this->baseUrl, [
+                'auth' => [$this->publicApiKey, $this->privateApiKey],
+                'json' => $payload
+            ]);
 
-        $this->response = $this->response->getBody()->getContents();
+            $this->response = $this->response->getBody()->getContents();
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            //
+        }
     }
 }
