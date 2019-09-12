@@ -98,7 +98,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
             //
         }
     }
@@ -123,7 +123,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
             //
         }
     }
