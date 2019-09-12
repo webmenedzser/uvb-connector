@@ -64,6 +64,21 @@ The `UVBConnector` class takes care of the communication between your app and th
   $response = $connector->get();
 ```
 
+The API will answer with a JSON string with a structure like this: 
+
+```json
+{
+    "status": 200,
+    "message": {
+        "good": 3,
+        "bad": 5,
+        "goodRate": 0.375,
+        "badRate": 0.625,
+        "totalRate": -0.25,
+    }
+}
+``` 
+
 ### Submit order outcome to UV-B API
 
 ```php
