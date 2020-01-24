@@ -3,7 +3,7 @@
   "description": "UVB API Connector",
   "minimum-stability": "stable",
   "license": "MIT",
-  "version": "0.2.3",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Ottó Radics",
