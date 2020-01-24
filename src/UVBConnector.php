@@ -38,7 +38,7 @@ class UVBConnector
      *
      * @var string string
      */
-    public $baseUrl = 'https://uvb.webmenedzser.hu/api/v1/signals/';
+    public $baseUrl = 'https://utanvet-ellenor.hu/api/v1/signals/';
 
     /**
      * @var
