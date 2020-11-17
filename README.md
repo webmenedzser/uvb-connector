@@ -53,6 +53,7 @@ The `UVBConnector` class takes care of the communication between your app and th
   $email = 'tim@apple.com';
   $publicApiKey = 'aaaa';
   $privateApiKey = 'bbbb';
+  $threshold = 0.5;
 
   $connector = new UVBConnector(
     $email, 
