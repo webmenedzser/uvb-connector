@@ -46,6 +46,11 @@ class UVBConnector
     public $response;
 
     /**
+     * @var float $threshold
+     */
+    public $threshold;
+
+    /**
      * UVBConnector constructor.
      *
      * @param $email
@@ -91,10 +96,16 @@ class UVBConnector
      */
     private function _checkUVBService() : void
     {
+        $payload = [
+            'threshold' => $this->threshold
+        ];
+
         $client = new Client();
+
         try {
-            $this->response = $client->request('GET', $this->baseUrl . $this->hash, [
-                'auth' => [$this->publicApiKey, $this->privateApiKey]
+            $this->response = $client->request('POST', $this->baseUrl . $this->hash, [
+                'auth' => [$this->publicApiKey, $this->privateApiKey],
+                'json' => $payload
             ]);
 
             $this->response = $this->response->getBody()->getContents();
