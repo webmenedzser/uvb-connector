@@ -59,6 +59,9 @@ The `UVBConnector` class takes care of the communication between your app and th
     $publicApiKey, 
     $privateApiKey
   );
+  
+  // Set a threshold for the request
+  $connector->threshold = $threshold;
 
   // Get reputation by hash
   $response = $connector->get();
