@@ -3,6 +3,7 @@
 namespace webmenedzser\UVBConnector;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 /**
  * Class UVBConnector
@@ -12,6 +13,9 @@ use GuzzleHttp\Client;
  */
 class UVBConnector
 {
+    const SANDBOX_BASE_URL = 'https://sandbox.utanvet-ellenor.hu/api/v1/signals/';
+    const PRODUCTION_BASE_URL = 'https://utanvet-ellenor.hu/api/v1/signals/';
+
     /**
      * The hash produced by sha256 hashing the e-mail.
      *
@@ -38,7 +42,7 @@ class UVBConnector
      *
      * @var string string
      */
-    public $baseUrl = 'https://utanvet-ellenor.hu/api/v1/signals/';
+    public $baseUrl;
 
     /**
      * @var
@@ -53,12 +57,18 @@ class UVBConnector
     /**
      * UVBConnector constructor.
      *
-     * @param $email
-     * @param $publicApiKey
-     * @param $privateApiKey
+     * @param string $email
+     * @param string $publicApiKey
+     * @param string $privateApiKey
+     * @param bool $production
      */
-    function __construct($email, $publicApiKey, $privateApiKey)
+    public function __construct(String $email, String $publicApiKey, String $privateApiKey, bool $production = true)
     {
+        /**
+         * Set $baseUrl dynamically based on 4th parameter.
+         */
+        $this->baseUrl = $production ? self::PRODUCTION_BASE_URL : self::SANDBOX_BASE_URL;
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // Remove the string after + before @
             $email = preg_replace('/(.+)\+.*(@.+)/', '$1$2', $email);
@@ -109,7 +119,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
+        } catch (ClientException $e) {
             //
         }
     }
@@ -134,7 +144,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
+        } catch (ClientException $e) {
             //
         }
     }

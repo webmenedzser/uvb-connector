@@ -1,6 +1,6 @@
 # UV-B API Connector
 
-This package is the PHP connector for the UV-B API 1.0.
+This package is the PHP connector library for the UV-B API 1.0.
 
 ## Installing
 
@@ -17,7 +17,7 @@ Then use your framework's autoload, or simply add:
   require 'vendor/autoload.php';
 ```
 
-## Manual install
+## Manual installation
 
 If you wish to omit using Composer altogether, you can download the sources from the repository and use any [PSR-4](http://www.php-fig.org/psr/psr-4/) compatible autoloader.
 
@@ -104,3 +104,33 @@ The API will answer with a JSON string with a structure like this:
   // Submit order outcome to API
   $response = $connector->post($outcome);
 ```
+
+## Sandbox environment
+
+By setting the 4<sup>th</sup> parameter of UVBConnector constructor to false, the library will use the sandbox environment instead of the production one. **Please use this when you are experimenting with your shop or integration.**
+
+```php
+<?php 
+  use webmenedzser\UVBConnector\UVBConnector;
+
+  $email = 'tim@apple.com';
+  $publicApiKey = 'aaaa';
+  $privateApiKey = 'bbbb';
+  $production = false;
+  $threshold = 0.5;
+
+  $connector = new UVBConnector(
+    $email, 
+    $publicApiKey, 
+    $privateApiKey,
+    $production
+  );
+  
+  // Set a threshold for the request
+  $connector->threshold = $threshold;
+
+  // Get reputation by hash
+  $response = $connector->get();
+```
+
+> The sandbox API will behave the same as the production with one exception: the data it provides will be randomized - **don't use it in production!** 
