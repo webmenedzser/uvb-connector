@@ -113,7 +113,7 @@ class UVBConnector
         $client = new Client();
 
         try {
-            $this->response = $client->request('POST', $this->baseUrl . $this->hash, [
+            $this->response = $client->post($this->baseUrl . $this->hash, [
                 'auth' => [$this->publicApiKey, $this->privateApiKey],
                 'json' => $payload
             ]);
@@ -138,7 +138,7 @@ class UVBConnector
 
         $client = new Client();
         try {
-            $this->response = $client->request('POST', $this->baseUrl, [
+            $this->response = $client->post($this->baseUrl, [
                 'auth' => [$this->publicApiKey, $this->privateApiKey],
                 'json' => $payload
             ]);
