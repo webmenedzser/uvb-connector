@@ -3,7 +3,7 @@
 namespace webmenedzser\UVBConnector;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class UVBConnector
@@ -119,7 +119,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (ClientException $e) {
+        } catch (RequestException $e) {
             //
         }
     }
@@ -144,7 +144,7 @@ class UVBConnector
             ]);
 
             $this->response = $this->response->getBody()->getContents();
-        } catch (ClientException $e) {
+        } catch (RequestException $e) {
             //
         }
     }
