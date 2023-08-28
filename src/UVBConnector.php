@@ -73,6 +73,9 @@ class UVBConnector
             // Remove the string after + before @
             $email = preg_replace('/(.+)\+.*(@.+)/', '$1$2', $email);
 
+            // Lowercase e-mail address
+            $email = strtolower($email);
+
             // Hash the string with sha256sum
             $email = hash('sha256', $email);
 
