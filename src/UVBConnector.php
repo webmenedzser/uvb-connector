@@ -97,9 +97,9 @@ class UVBConnector
         return $this->response;
     }
 
-    public function post($outcome)
+    public function post($outcome, $orderId = '')
     {
-        $this->_submitToUVBService($outcome);
+        $this->_submitToUVBService($outcome, $orderId);
 
         return $this->response;
     }
@@ -132,11 +132,12 @@ class UVBConnector
      *
      * @param $outcome
      */
-    private function _submitToUVBService($outcome) : void
+    private function _submitToUVBService($outcome, $orderId = '') : void
     {
         $payload = [
             'emailHash' => $this->hash,
-            'outcome' => $outcome
+            'outcome' => $outcome,
+            'orderId' => $orderId
         ];
 
         $client = new Client();
