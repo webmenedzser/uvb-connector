@@ -102,7 +102,7 @@ The API will answer with a JSON string with a structure like this:
   );
 
   // Submit order outcome to API
-  $response = $connector->post($outcome);
+  $response = $connector->post($outcome, $orderId);
 ```
 
 ## Sandbox environment
