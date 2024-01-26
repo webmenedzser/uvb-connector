@@ -94,6 +94,7 @@ The API will answer with a JSON string with a structure like this:
   $privateApiKey = 'bbbb';
   // 1 if good, -1 if bad;
   $outcome = 1;
+  $orderId = '#98143';
 
   $connector = new UVBConnector(
     $email, 
