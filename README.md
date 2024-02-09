@@ -1,6 +1,6 @@
-# UV-B API Connector
+# Utánvét Ellenőr API Connector
 
-This package is the PHP connector library for the UV-B API 1.0.
+This package is the PHP connector library for the Utánvét Ellenőr API 1.x.
 
 ## Installing
 
@@ -23,7 +23,7 @@ If you wish to omit using Composer altogether, you can download the sources from
 
 ## Getting started
 
-You can start making requests to the UV-B API just by creating a new `UVBConnector` instance and calling it's `get()` or `post($outcome)` method. 
+You can start making requests to the Utánvét Ellenőr API just by creating a new `UVBConnector` instance and calling its `get()` or `post($outcome)` method. 
 
 ```php
 <?php
@@ -40,11 +40,11 @@ You can start making requests to the UV-B API just by creating a new `UVBConnect
   );
 ```
 
-The `UVBConnector` class takes care of the communication between your app and the UV-B API server.
+The `UVBConnector` class takes care of the communication between your app and the Utánvét Ellenőr API.
 
 ## General usage
 
-### Get e-mail reputation from UV-B API
+### Get e-mail reputation from Utánvét Ellenőr API
 
 ```php
 <?php 
@@ -81,10 +81,22 @@ The API will answer with a JSON string with a structure like this:
         "totalRate": -0.25,
     }
 }
-``` 
+```
 
-### Submit order outcome to UV-B API
+If you would like to display these values, use the numeric `totalRate` and/or `good` and `bad` values. Avoid aliasing these values with phrases, as they might mislead users.
+ 
+> #### Examples of using the API responses in a UI:
+> 
+> ##### Good:
+> - 3 successful, 2 failed (deliveries), reputation: 0.2
+> - 60% successful delivery rate
+>
+> ##### Bad:
+> - Order should not be fulfilled. (Why? No exact explanation is given.)
+> - Too much failed deliveries. (How much is "too much"?)
+> - Bad customer reputation. (What reputation is considered "bad"?)
 
+### Submit order outcome to Utánvét Ellenőr API
 ```php
 <?php
   use webmenedzser\UVBConnector\UVBConnector;
@@ -105,6 +117,8 @@ The API will answer with a JSON string with a structure like this:
   // Submit order outcome to API
   $response = $connector->post($outcome, $orderId);
 ```
+
+Order status changes are the endorsed and ideal events to trigger these API calls.
 
 ## Sandbox environment
 
