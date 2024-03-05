@@ -97,9 +97,9 @@ class UVBConnector
         return $this->response;
     }
 
-    public function post($outcome, $orderId = '')
+    public function post($outcome, $orderId = null, $phoneNumber = null, $countryCode = null, $postalCode = null, $addressLine = null)
     {
-        $this->_submitToUVBService($outcome, $orderId);
+        $this->_submitToUVBService($outcome, $orderId, $phoneNumber, $countryCode, $postalCode, $addressLine);
 
         return $this->response;
     }
