@@ -129,6 +129,15 @@ If you would like to display these values, use the numeric `totalRate` and/or `g
   );
 ```
 
+#### Payload data members:
+
+- **outcome**: +1 if successful, -1 if refused/unclaimed.
+- **orderId**: Public-facing ID of the order, which can be used by anyone to identify the order. 
+- **phoneNumber**: Phone number in international format, starting with the + sign, e.g.: +36209238883
+- **countryCode**: Country code in ISO 3166-1 alpha-2 format (e.g.: HU)
+- **postalCode**: Postal code the way it is used in the shipping address country (e.g.: 8640)
+- **addressLine**: Address line, without country, country code or postal code. Multiple address lines should be concatenated into one line.
+
 Order status changes are the endorsed and ideal events to trigger these API calls.
 
 ## Sandbox environment
