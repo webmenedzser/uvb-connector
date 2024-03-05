@@ -130,14 +130,23 @@ class UVBConnector
     /**
      * Submit payload to UVB Signals API endpoint
      *
-     * @param $outcome
+     * @param      $outcome
+     * @param null $orderId
+     * @param null $phoneNumber
+     * @param null $countryCode
+     * @param null $postalCode
+     * @param null $addressLine
      */
-    private function _submitToUVBService($outcome, $orderId = '') : void
+    private function _submitToUVBService($outcome, $orderId = null, $phoneNumber = null, $countryCode = null, $postalCode = null, $addressLine = null) : void
     {
         $payload = [
             'emailHash' => $this->hash,
             'outcome' => $outcome,
-            'orderId' => $orderId
+            'orderId' => $orderId,
+            'phoneNumber' => $phoneNumber,
+            'countryCode' => $countryCode,
+            'postalCode' => $postalCode,
+            'addressLine' => $addressLine,
         ];
 
         $client = new Client();

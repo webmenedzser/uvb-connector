@@ -107,6 +107,10 @@ If you would like to display these values, use the numeric `totalRate` and/or `g
   // 1 if good, -1 if bad;
   $outcome = 1;
   $orderId = '#98143';
+  $phoneNumber = '+36209238883';
+  $countryCode = 'HU';
+  $postalCode = '8640';
+  $addressLine = 'Szigligeti utca 10.';
 
   $connector = new UVBConnector(
     $email, 
@@ -115,7 +119,14 @@ If you would like to display these values, use the numeric `totalRate` and/or `g
   );
 
   // Submit order outcome to API
-  $response = $connector->post($outcome, $orderId);
+  $response = $connector->post(
+    $outcome, 
+    $orderId, 
+    $phoneNumber, 
+    $countryCode, 
+    $postalCode, 
+    $addressLine
+  );
 ```
 
 Order status changes are the endorsed and ideal events to trigger these API calls.
